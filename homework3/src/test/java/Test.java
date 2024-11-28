@@ -11,6 +11,7 @@ public class Test {
         Pawn white_pawn = new Pawn("White");
         Pawn black_pawn = new Pawn("Black");
         Rook white_rook = new Rook("White");
+        Queen white_quen = new Queen("White");
 
         System.out.println(white_bishop.getColor());
         System.out.println(white_bishop.getSymbol());
@@ -18,6 +19,11 @@ public class Test {
         chessBoard.board[3][3]=white_bishop;
         chessBoard.printBoard();
         testMoveToPosition(3,3, 6,6);
+
+
+        chessBoard.board[1][1]=white_bishop;
+        chessBoard.printBoard();
+        testMoveToPosition(1,1, 3,5);
 
         chessBoard.board[3][3]=white_bishop;
         chessBoard.board[6][6]=white_bishop2;
@@ -99,6 +105,39 @@ public class Test {
         chessBoard.board[1][4] = black_pawn;
         chessBoard.printBoard();
         testMoveToPosition(1,1,1,4);
+
+
+        chessBoard.board[3][3] = white_quen;
+        chessBoard.printBoard();
+        testMoveToPosition(3,3, 6,6);
+        chessBoard.board[1][1] = white_quen;
+        chessBoard.printBoard();
+        testMoveToPosition(1,1, 6,1);
+
+        chessBoard.board[3][3] = white_quen;
+        chessBoard.board[5][5] = white_bishop;
+        chessBoard.printBoard();
+        testMoveToPosition(3,3, 6,6);
+
+        chessBoard.board[3][3] = white_quen;
+        chessBoard.board[5][5] = black_bishop;
+        chessBoard.printBoard();
+        testMoveToPosition(3,3, 5,5);
+
+        chessBoard.board[3][3] = white_quen;
+        chessBoard.board[3][5] = white_bishop;
+        chessBoard.printBoard();
+        testMoveToPosition(3,3, 3,5);
+
+        chessBoard.board[3][3] = white_quen;
+        chessBoard.board[3][5] = black_bishop;
+        chessBoard.printBoard();
+        testMoveToPosition(3,3, 3,5);
+
+        chessBoard.board[1][1] = white_quen;
+        chessBoard.board[3][6] = black_bishop;
+        chessBoard.printBoard();
+        testMoveToPosition(1,1, 3,6);
 */
 
     }

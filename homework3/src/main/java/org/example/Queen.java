@@ -10,22 +10,146 @@ package org.example;
     Реализуйте метод getSymbol так, чтобы он возвращал строку — символ фигуры, для короля — K, для ферзя — Q.
  */
 
-public class Queen extends ChessPiece{
+public class Queen extends ChessPiece {
     public Queen(String color) {
         super(color);
     }
 
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int startLine, int startColumn, int endLine, int endColumn) {
-        return false;
-    }
 
-    public boolean moveLikeBishop (ChessBoard chessBoard, int startLine, int startColumn, int endLine, int endColumn) {
+        if (!isValidPositions(startLine, startColumn, endLine, endColumn)) {
+            return false;
+        }
+
+        if (!((Math.abs(startLine - endLine) == Math.abs(startColumn - endColumn))
+                || (startColumn == endColumn || startLine == endLine))) {
+            return false;
+        }
+
+        ChessPiece chessPiece = chessBoard.board[endLine][endColumn];
+        boolean isFreePosition = (chessPiece == null);
+
+        if (!isFreePosition && this.isTeammate(chessPiece)) {
+            return false;
+        }
+
+        if (Math.abs(startLine - endLine) == Math.abs(startColumn - endColumn)) {
+            if (!moveLikeBishop(chessBoard, startLine, startColumn, endLine, endColumn))
+                return false;
+        } else {
+            if (!moveLikeRook(chessBoard, startLine, startColumn, endLine, endColumn))
+                return false;
+        }
+
+        if (!isFreePosition) {
+            System.out.println("Queen Killed " + chessPiece.getSymbol());
+        }
 
         return true;
     }
 
-    public boolean moveLikeRook (ChessBoard chessBoard, int startLine, int startColumn, int endLine, int endColumn){
+    private boolean moveLikeBishop(ChessBoard chessBoard, int startLine, int startColumn, int endLine, int endColumn) {
+
+        int start_x_traversal, start_y_traversal, end_x_traversal, end_y_traversal = 0;
+
+        if (endLine < startLine && endColumn < startColumn || endLine > startLine && endColumn > startColumn) {
+
+            if (endLine > startLine) {
+                start_x_traversal = startLine;
+                start_y_traversal = startColumn;
+                end_x_traversal = endLine;
+                end_y_traversal = endColumn;
+            } else {
+                start_x_traversal = endLine;
+                start_y_traversal = endColumn;
+                end_x_traversal = startLine;
+                end_y_traversal = startColumn;
+
+            }
+
+            int i = start_x_traversal + 1;
+            int j = start_y_traversal + 1;
+            while (i < end_x_traversal && j < end_y_traversal) {
+                if (chessBoard.board[i][j] != null) {
+                    System.out.println("Traversal Like Bishop failed");
+                    return false;
+                }
+                i++;
+                j++;
+            }
+
+        } else {
+            if (endLine > startLine) {
+                start_x_traversal = startLine;
+                start_y_traversal = startColumn;
+                end_x_traversal = endLine;
+                end_y_traversal = endColumn;
+            } else {
+                start_x_traversal = endLine;
+                start_y_traversal = endColumn;
+                end_x_traversal = startLine;
+                end_y_traversal = startColumn;
+            }
+
+            int i = start_x_traversal + 1;
+            int j = start_y_traversal - 1;
+            while (i < end_x_traversal && j > end_y_traversal) {
+                if (chessBoard.board[i][j] != null) {
+                    System.out.println("Traversal Like Bishop failed");
+                    return false;
+                }
+                i++;
+                j--;
+            }
+
+        }
+        return true;
+    }
+
+    private boolean moveLikeRook(ChessBoard chessBoard, int startLine, int startColumn, int endLine, int endColumn) {
+
+        int start_x_traversal, start_y_traversal, end_x_traversal, end_y_traversal = 0;
+
+        if ((endLine < startLine || endLine > startLine) && endColumn == startColumn) {
+
+            if (endLine > startLine) {
+                start_x_traversal = startLine;
+                end_x_traversal = endLine;
+
+            } else {
+                start_x_traversal = endLine;
+                end_x_traversal = startLine;
+            }
+
+            for (int i = start_x_traversal + 1; i < end_x_traversal; i++) {
+                if (chessBoard.board[i][endColumn] != null) {
+                    System.out.println("Traversal Like Rook failed");
+                    return false;
+                }
+            }
+            System.out.println("Vertical Traversal Passed");
+
+        } else {
+            if (endColumn > startColumn) {
+                start_y_traversal = startColumn;
+                end_y_traversal = endColumn;
+            } else {
+                start_y_traversal = endColumn;
+                end_y_traversal = startColumn;
+            }
+
+            for (int j = start_y_traversal + 1; j < end_y_traversal; j++) {
+                if (chessBoard.board[endLine][j] != null) {
+                    System.out.println("Traversal like Rook failed");
+                    return false;
+                }
+            }
+
+            System.out.println("Horizontal Traversal Passed");
+
+        }
+
         return true;
     }
 
