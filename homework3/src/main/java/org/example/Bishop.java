@@ -16,25 +16,23 @@ public class Bishop extends ChessPiece {
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int startLine, int startColumn, int endLine, int endColumn) {
 
-        if(!isValidPositions(startLine,startColumn, endLine, endColumn)) {
+        if (!isValidPositions(startLine, startColumn, endLine, endColumn)) {
             System.out.println("Is NOT ValidPositions");
             return false;
         }
 
-        if (startLine == endLine || startColumn == endColumn) {
-            System.out.println("startLine == endLine || startColumn == endColumn");
+        if (Math.abs(startLine - endLine) != Math.abs(startColumn - endColumn)) {
             return false;
         }
 
         ChessPiece chessPiece = chessBoard.board[endLine][endColumn];
         boolean isFreePosition = (chessPiece == null);
-        System.out.println("boolean isFreePosition = " +isFreePosition);
-        System.out.println("isTeammate = " +this.isTeammate(chessPiece));
+        System.out.println("boolean isFreePosition = " + isFreePosition);
+        System.out.println("isTeammate = " + this.isTeammate(chessPiece));
         if (!isFreePosition && this.isTeammate(chessPiece)) {
             System.out.println("isTeammate");
             return false;
-        }
-        else System.out.println("Is NOT A Teammate");
+        } else System.out.println("Is NOT A Teammate");
 
         int start_x_traversal, start_y_traversal, end_x_traversal, end_y_traversal = 0;
 
@@ -52,13 +50,15 @@ public class Bishop extends ChessPiece {
                 end_y_traversal = startColumn;
 
             }
-            for (int i = start_x_traversal+1; i < end_x_traversal; i++) {
-                for (int j = start_y_traversal+1; j < end_y_traversal; j++) {
-                    if (chessBoard.board[i][j] != null) {
-                        System.out.println("Traversal failed");
-                        return false;
-                    }
+            int i = start_x_traversal+1;
+            int j = start_y_traversal+1;
+            while (i < end_x_traversal && j < end_y_traversal) {
+                if (chessBoard.board[i][j] != null) {
+                    System.out.println("Traversal failed");
+                    return false;
                 }
+                i++;
+                j++;
             }
 
         } else {
@@ -73,13 +73,16 @@ public class Bishop extends ChessPiece {
                 end_x_traversal = startLine;
                 end_y_traversal = startColumn;
             }
-            for (int i = start_x_traversal+1; i < end_x_traversal; i++) {
-                for (int j = start_y_traversal-1; j > end_y_traversal; j--) {
-                    if (chessBoard.board[i][j] != null) {
-                        System.out.println("Traversal failed");
-                        return false;
-                    }
+
+            int i = start_x_traversal+1;
+            int j = start_y_traversal-1;
+            while (i < end_x_traversal && j > end_y_traversal) {
+                if (chessBoard.board[i][j] != null) {
+                    System.out.println("Traversal failed");
+                    return false;
                 }
+                i++;
+                j--;
             }
 
         }
