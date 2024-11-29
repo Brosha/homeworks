@@ -13,9 +13,12 @@ public class Test {
         Rook white_rook = new Rook("White");
         Queen white_quen = new Queen("White");
 
+/*
         System.out.println(white_bishop.getColor());
         System.out.println(white_bishop.getSymbol());
-/*
+        chessBoard.board[3][3]=white_bishop;
+        testMoveToPosition(3,3, 3,3);
+
         chessBoard.board[3][3]=white_bishop;
         chessBoard.printBoard();
         testMoveToPosition(3,3, 6,6);
