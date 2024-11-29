@@ -48,4 +48,16 @@ public abstract class ChessPiece {
 
         return endLine >= 0 && endLine <= 7 && endColumn >= 0 && endColumn <= 7;
     }
+
+    public void setCheck(boolean check){
+        this.check =check;
+    }
+
+    public boolean getCheck(){
+        return this.check;
+    }
+
+
+
+
 }

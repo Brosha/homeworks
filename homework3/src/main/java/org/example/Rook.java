@@ -22,12 +22,12 @@ public class Rook extends ChessPiece {
 
         if (startColumn != endColumn && startLine != endLine) return false;
 
-
         ChessPiece chessPiece = chessBoard.board[endLine][endColumn];
         boolean isFreePosition = (chessPiece == null);
         if (!isFreePosition && this.isTeammate(chessPiece)) {
             return false;
         }
+
 
         int start_x_traversal, start_y_traversal, end_x_traversal, end_y_traversal = 0;
 
@@ -68,9 +68,13 @@ public class Rook extends ChessPiece {
 
 
         }
+
         if (!isFreePosition) {
             System.out.println("Rook Killed " + chessPiece.getSymbol());
         }
+
+        if(!getCheck())
+            setCheck(true);
 
         return true;
     }
