@@ -24,7 +24,8 @@ public class Rook extends ChessPiece {
 
         ChessPiece chessPiece = chessBoard.board[endLine][endColumn];
         boolean isFreePosition = (chessPiece == null);
-        if (!isFreePosition && this.isTeammate(chessPiece)) {
+
+        if (this.isTeammate(chessPiece)) {
             return false;
         }
 
@@ -73,8 +74,8 @@ public class Rook extends ChessPiece {
             System.out.println("Rook Killed " + chessPiece.getSymbol());
         }
 
-        if(!getCheck())
-            setCheck(true);
+        if(getCheck())
+            setCheck(false);
 
         return true;
     }

@@ -8,10 +8,13 @@ public class Test {
         Bishop white_bishop2 = new Bishop("White");
         Bishop black_bishop = new Bishop("Black");
         Horse white_horse = new Horse("White");
+        Horse black_horse = new Horse("Black");
         Pawn white_pawn = new Pawn("White");
         Pawn black_pawn = new Pawn("Black");
         Rook white_rook = new Rook("White");
+        Rook black_rook = new Rook("Black");
         Queen white_quen = new Queen("White");
+        King white_king = new King("White");
 
 /*
         System.out.println(white_bishop.getColor());
@@ -109,7 +112,6 @@ public class Test {
         chessBoard.printBoard();
         testMoveToPosition(1,1,1,4);
 
-
         chessBoard.board[3][3] = white_quen;
         chessBoard.printBoard();
         testMoveToPosition(3,3, 6,6);
@@ -141,19 +143,39 @@ public class Test {
         chessBoard.board[3][6] = black_bishop;
         chessBoard.printBoard();
         testMoveToPosition(1,1, 3,6);
+
+        chessBoard.board[0][0] = white_rook;
+        chessBoard.board[0][4] = white_king;
+        chessBoard.printBoard();
+        chessBoard.castling0();
+        chessBoard.printBoard();
+
+        chessBoard.board[0][0] = white_rook;
+        chessBoard.board[0][4] = white_king;
+        chessBoard.board[5][2] = black_rook;
+        testMoveToPosition(0,0,1,0);
+        testMoveToPosition(5,2,6,2);
+        testMoveToPosition(1,0,0,0);
+        chessBoard.castling0();
+        chessBoard.printBoard();
 */
+        chessBoard.board[0][4] = white_king;
+        chessBoard.board[1][6] = black_horse;
+        chessBoard.printBoard();
+        System.out.println(((King) chessBoard.board[0][4]).isUnderAttack(chessBoard,0,4));
+
 
     }
     private static boolean testMoveToPosition(int startLine, int startColumn, int endLine, int endColumn){
         if (chessBoard.moveToPosition(startLine, startColumn, endLine, endColumn)) {
             System.out.println("Успешно передвинулись");
-            chessBoard.printBoard();
-            wipeBoard();
             return true;
         } else System.out.println("Передвижение не удалось");
+        return false;
+    }
+    private static void printANDWipe(){
         chessBoard.printBoard();
         wipeBoard();
-        return false;
     }
 
     private static void wipeBoard (){

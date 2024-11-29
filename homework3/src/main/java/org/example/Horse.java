@@ -21,7 +21,7 @@ public class Horse extends ChessPiece {
 
         ChessPiece chessPiece = chessBoard.board[endLine][endColumn];
         boolean isFreePosition = (chessPiece == null);
-        if (!isFreePosition && this.isTeammate(chessPiece)) {
+        if (this.isTeammate(chessPiece)) {
             return false;
         }
         if ((startLine - 2 == endLine && (startColumn - 1 == endColumn || startColumn + 1 == endColumn))

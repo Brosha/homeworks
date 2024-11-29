@@ -30,7 +30,7 @@ public class King extends ChessPiece {
 
         ChessPiece chessPiece = chessBoard.board[endLine][endColumn];
         boolean isFreePosition = (chessPiece == null);
-        if (!isFreePosition && this.isTeammate(chessPiece)) {
+        if (this.isTeammate(chessPiece)) {
             return false;
         }
         if ((startLine + 1 == endLine && (startColumn - 1 == endLine || startColumn == endLine || startColumn + 1 == endColumn))
@@ -41,6 +41,8 @@ public class King extends ChessPiece {
             if (!isFreePosition) {
                 System.out.println("King Killed " + chessPiece.getSymbol());
             }
+            if (getCheck()) setCheck(false);
+
             return true;
         }
 
@@ -50,7 +52,10 @@ public class King extends ChessPiece {
 
     public boolean isUnderAttack(ChessBoard board, int line, int column) {
 
-        if (!board.checkPos(line) || !board.checkPos(column)) return false;
+        if (!board.checkPos(line) || !board.checkPos(column)) {
+            System.out.println("WRONG!");
+            return false;
+        }
 
         return (isUnderDiagonalAttack(board, line, column))
                 || isUnderLineAttack(board, line, column)

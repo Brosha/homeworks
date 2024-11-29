@@ -55,12 +55,79 @@ public class ChessBoard {
 
     //TODO
     public boolean castling0() {
+        if (board[0][4] == null || !board[0][4].getSymbol().equals("K") ||
+                board[0][4].getSymbol().equals("K") && !board[0][4].getCheck())
+            return false;
+        else if (board[0][0] != null && board[0][0].getCheck()
+                && !((King) board[0][4]).isUnderAttack(this, 0, 2) ) {
+            if (isLineFree(0, 1, 4)) {
+                board[0][2] = board[0][4];
+                board[0][4] = null;
+                board[0][3] = board[0][0];
+                board[0][0] = null;
+                board[0][2].setCheck(false);
+                board[0][3].setCheck(false);
+                return true;
+            }
+
+        } else if (board[0][7] != null && board[0][7].getCheck()
+                && !((King) board[0][4]).isUnderAttack(this, 0, 6)) {
+            if (isLineFree(0, 5, 6)) {
+                board[0][6] = board[0][4];
+                board[0][4] = null;
+                board[0][5] = board[0][0];
+                board[0][0] = null;
+                board[0][6].setCheck(false);
+                board[0][5].setCheck(false);
+                return true;
+            }
+        }
+
         return false;
     }
 
     //TODO
     public boolean castling7() {
+
+        if (board[7][4] == null || !board[7][4].getSymbol().equals("K") ||
+                board[7][4].getSymbol().equals("K") && !board[7][4].getCheck())
+            return false;
+        else if (board[7][0] != null && board[7][0].getCheck()
+                && !((King) board[7][4]).isUnderAttack(this, 7, 2) ) {
+            if (isLineFree(7, 1, 4)) {
+                board[7][2] = board[7][4];
+                board[7][4] = null;
+                board[7][3] = board[7][0];
+                board[7][0] = null;
+                board[7][2].setCheck(false);
+                board[7][3].setCheck(false);
+                return true;
+            }
+
+        } else if (board[7][7] != null && board[7][7].getCheck()
+                && !((King) board[7][4]).isUnderAttack(this, 7, 6)) {
+            if (isLineFree(7, 5, 6)) {
+                board[7][6] = board[7][4];
+                board[7][4] = null;
+                board[7][5] = board[7][0];
+                board[7][0] = null;
+                board[7][6].setCheck(false);
+                board[7][5].setCheck(false);
+                return true;
+            }
+        }
+
         return false;
+
+
+    }
+
+    private boolean isLineFree(int line, int startColumn, int endColumn) {
+        for (int j = startColumn; j < endColumn; j++) {
+            if (board[line][j] != null) return false;
+        }
+
+        return true;
     }
 }
 

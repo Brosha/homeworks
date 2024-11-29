@@ -27,12 +27,11 @@ public class Bishop extends ChessPiece {
 
         ChessPiece chessPiece = chessBoard.board[endLine][endColumn];
         boolean isFreePosition = (chessPiece == null);
-        System.out.println("boolean isFreePosition = " + isFreePosition);
-        System.out.println("isTeammate = " + this.isTeammate(chessPiece));
-        if (!isFreePosition && this.isTeammate(chessPiece)) {
+
+        if (this.isTeammate(chessPiece)) {
             System.out.println("isTeammate");
             return false;
-        } else System.out.println("Is NOT A Teammate");
+        }
 
         int start_x_traversal, start_y_traversal, end_x_traversal, end_y_traversal = 0;
 
