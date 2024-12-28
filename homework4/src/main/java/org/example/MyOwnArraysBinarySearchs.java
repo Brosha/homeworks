@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.Arrays;
 import java.util.Comparator;
 
 public class MyOwnArraysBinarySearchs {
@@ -230,18 +229,18 @@ public class MyOwnArraysBinarySearchs {
      * or the search key is not comparable to the elements of the array using this comparator.
      */
 
-    public static <T> int binarySearch(T[] a, T key, Comparator c) {
+    public static <T> int binarySearch(T[] a, T key, Comparator<? super T> c) {
         if (c == null) return privateBinarySearch(a, 0, a.length, key);
         return privateBinarySearch(a, 0, a.length, key, c);
     }
 
-    public static <T> int binarySearch(T[] a, int fromIndex, int toIndex, T key, Comparator c) {
+    public static <T> int binarySearch(T[] a, int fromIndex, int toIndex, T key, Comparator<? super T> c) {
         checkIndexes(a.length, fromIndex, toIndex);
         if (c == null) return privateBinarySearch(a, fromIndex, toIndex, key, c);
         return privateBinarySearch(a, fromIndex, toIndex, key, c);
     }
 
-    private static <T> int privateBinarySearch(T[] a, int fromIndex, int toIndex, T key, Comparator c) {
+    private static <T> int privateBinarySearch(T[] a, int fromIndex, int toIndex, T key, Comparator<? super T> c) {
         int low = fromIndex;
         int high = toIndex - 1;
         while (low <= high) {
