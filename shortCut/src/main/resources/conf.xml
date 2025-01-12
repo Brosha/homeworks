@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="ALPHABET">abcdefghijklmnopqrstuvwxyz0123456789</entry>
+    <entry key="TOKEN_LENGTH">8</entry>
+    <entry key="LIFE_TIME">24</entry>
+    <entry key="LIMIT">10</entry>
+    <entry key="DOMAIN">test.com</entry>
+
+</properties>
+
