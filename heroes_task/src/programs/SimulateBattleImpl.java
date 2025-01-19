@@ -5,31 +5,37 @@ import com.battle.heroes.army.Unit;
 import com.battle.heroes.army.programs.PrintBattleLog;
 import com.battle.heroes.army.programs.SimulateBattle;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.*;
 
 
 /**
- * Вставка в дерево O(n log n)
- * Удаление из дерева в худшем случае n Log n
+ * Вставка в новый List n
+ * Сортировка в новом массиве по убыванию атаки n Log n
+ * Вставка в Связанный список - n
+ * Итерация будет каждый раз по отсортированному списку - n
+ * Удаление будет константа
+ * Значит, сложность будет O(n*n)
  */
 
 public class SimulateBattleImpl implements SimulateBattle {
-    private PrintBattleLog printBattleLog; // Позволяет логировать. Использовать после каждой атаки юнита
+
+    // Позволяет логировать. Использовать после каждой атаки юнита
+    private PrintBattleLog printBattleLog;
 
     @Override
     public void simulate(Army playerArmy, Army computerArmy) throws InterruptedException {
 
-        TreeSet<Unit> playersOrder = new TreeSet<>(Comparator.comparingInt((Unit::getBaseAttack)).reversed());
-        TreeSet<Unit> computersOrder = new TreeSet<>(Comparator.comparingInt((Unit::getBaseAttack)).reversed());
+        LinkedList<Unit> playersOrder = setup(playerArmy);
+        LinkedList<Unit> computersOrder = setup(computerArmy);
+        System.out.println("playersOrder size: "+playersOrder.size());
+
         while (!playersOrder.isEmpty() && !computersOrder.isEmpty()) {
             simulateAttack(playersOrder);
             simulateAttack(computersOrder);
         }
     }
 
-    private void simulateAttack(TreeSet<Unit> unitsOrder) throws InterruptedException {
+    private void simulateAttack(LinkedList<Unit> unitsOrder) throws InterruptedException {
         Iterator<Unit> iterator = unitsOrder.iterator();
         while (iterator.hasNext()) {
             Unit attacker = iterator.next();
@@ -42,6 +48,16 @@ public class SimulateBattleImpl implements SimulateBattle {
                 }
             }
         }
+    }
+    /**
+      Создаём связанный список, который будет уже хранить отсортированные по атаке юниты.
+        Нам не надо будет каждый раз сортировать после удаления
+     **/
+
+    private LinkedList<Unit> setup(Army army){
+        ArrayList<Unit> units =new ArrayList<>(army.getUnits());
+        Collections.sort(units, Comparator.comparingInt((Unit::getBaseAttack)).reversed());
+        return new LinkedList<>(units);
 
     }
 }

@@ -69,8 +69,10 @@ public class GeneratePresetImpl implements GeneratePreset {
             System.out.println(unit.getxCoordinate() + " : " + unit.getyCoordinate());
         }
         System.out.println("Army Cost: " + armyCost);
-
-        return new Army(recruted);
+        Army army = new Army();
+        army.setUnits(recruted);
+        army.setPoints(armyCost);
+        return army;
     }
 
     private void generateCordinates(Set<String> coordinatesWrapper, Unit unit, Random random) {
