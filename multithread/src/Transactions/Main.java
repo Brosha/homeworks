@@ -1,6 +1,5 @@
 package Transactions;
 
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicIntegerArray;
@@ -29,7 +28,7 @@ public class Main {
             int[] balances = new int[usersCount];
 
             for (int i = 0; i < usersCount; i++) {
-                balances[i] = Integer.valueOf(input[i]);
+                balances[i] = Integer.parseInt(input[i]);
             }
 
             int transactionsCount = scanner.nextInt();
@@ -38,7 +37,7 @@ public class Main {
             for (int i = 0; i < transactionsCount; i++) {
                 inputLine = scanner.nextLine();
                 input = inputLine.split(" - ");
-                transactions[i] = new Transaction(Integer.valueOf(input[0]), Integer.valueOf(input[2]), Integer.valueOf(input[1]));
+                transactions[i] = new Transaction(Integer.parseInt(input[0]), Integer.parseInt(input[2]), Integer.parseInt(input[1]));
 
             }
             for (int i = 0; i < usersCount; i++) {
