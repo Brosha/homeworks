@@ -88,7 +88,12 @@ public class Main {
                 int fromBalance = balances.get(transaction.fromId);
                 if (fromBalance < transaction.amount) {
                     System.out.println(Thread.currentThread().getName() + " попытался перевести " + transaction.amount + ", но недостаточно средств.");
-                    return;
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(100); // Задержка 100 мс
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    continue;
                 }
 
                 if (balances.compareAndSet(transaction.fromId, fromBalance, fromBalance - transaction.amount)) {
