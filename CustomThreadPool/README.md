@@ -35,9 +35,9 @@
 
 **Результаты сравнения со стандартными пулами**:
 ```
-CustomPool time: 3200 ms
-FixedThreadPool time: 2800 ms
-CachedThreadPool time: 2500 ms
+CustomPool time: 5264 ms
+FixedThreadPool time: 4534 ms
+CachedThreadPool time: 201 ms
 ```
 
 **Выводы**:
